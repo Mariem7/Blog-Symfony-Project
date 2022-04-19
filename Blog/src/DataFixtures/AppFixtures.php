@@ -11,15 +11,14 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create
+        //we use faker library to have fake random information
+        $faker = Factory::create('fr_FR');
         for($i = 0; $i<10; $i++){
-
             $post = new Post();
-            $post->setTitle('Titre 1')
-                ->setContent('spring boot and angular tutorial')
-                ->setAuthor('Mary')
+            $post->setTitle($faker->sentence($nbWords=2, $variableNbWords= true))
+                ->setContent($faker->sentence($nbWords=10, $variableNbWords= true))
+                ->setAuthor($faker->name())
                 ->setCreateAt(new \DateTimeImmutable());
-
                 $manager->persist($post);
         }
 
